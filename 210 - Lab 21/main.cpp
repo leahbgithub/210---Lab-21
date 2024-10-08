@@ -31,26 +31,25 @@ public:
     }
 };
 
+const string Goat::names[15] = { "Leah", "Raj", "Heena", "Shria", "Snowy", "Charlie", "Anthony", "Jason", "Macy", "Mahi", "Khaleesi", "Jon", "Jake", "Linda", "Caroline" };
+const string Goat::colors[15] = { "Red", "Blue", "Green", "Yellow", "Purple", "Orange", "Pink", "White", "Black", "Grey", "Gold", "Silver", "Aqua", "Brown", "Turquoise" };
+
 class DoublyLinkedList {
 private:
     struct Node {
         int data;
         Node* prev;
         Node* next;
-        Node(int val, Node* p = nullptr, Node* n = nullptr) {
-            data = val;
-            prev = p;
-            next = n;
-        }
-    };
+        Node(Goat val, Node* p = nullptr, Node* n = nullptr) : data(val), prev(p), next(n) {}
+            };
     Node* head;
     Node* tail;
 
 public:
     // constructor
-    DoublyLinkedList() { head = nullptr; tail = nullptr; }
+    DoublyLinkedList() : head(nullptr), tail(nullptr) {}
 
-    void push_back(int value) {
+    void push_back(Goat value) {
         Node* newNode = new Node(value);
         if (!tail) // if there's no tail, the list is empty
             head = tail = newNode;
@@ -61,7 +60,7 @@ public:
         }
     }
 
-    void push_front(int value) {
+    void push_front(Goat value) {
         Node* newNode = new Node(value);
         if (!head) // if there's no head, the list is empty
             head = tail = newNode;
@@ -72,7 +71,7 @@ public:
         }
     }
 
-    void insert_after(int value, int position) {
+    void insert_after(Goat value, int position) {
         if (position < 0) {
             cout << "Position must be >= 0." << endl;
             return;
