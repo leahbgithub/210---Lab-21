@@ -98,10 +98,10 @@ public:
         temp->next = newNode;
     }
 
-    void delete_node(int value) {
+    void delete_node(string goatName) {
         if (!head) return; // Empty list
         Node* temp = head;
-        while (temp && temp->data != value)
+        while (temp && temp->data.getDetails().find(goatName) == string::npos)
             temp = temp->next;
         if (!temp) return; // Value not found
         if (temp->prev) {
@@ -118,23 +118,29 @@ public:
     }
 
     void print() {
+        if (!head) {
+            cout << "List is empty" << endl;
+            return;
+        }
         Node* current = head;
-        if (!current) return;
+        cout << "Forward: " << endl;
         while (current) {
-            cout << current->data << " ";
+            cout << "    " << current->data.getDetails() << endl;
             current = current->next;
         }
-        cout << endl;
     }
 
     void print_reverse() {
+        if (!tail) {
+            cout << "List is empty" << endl;
+            return;
+        }
         Node* current = tail;
-        if (!current) return;
+        cout << "Backward: " << endl;
         while (current) {
-            cout << current->data << " ";
+            cout << "    " << current->data.getDetails() << endl;
             current = current->prev;
         }
-        cout << endl;
     }
 
     ~DoublyLinkedList() {
@@ -148,20 +154,18 @@ public:
 
 // Driver program
 int main() {
+    srand(time(0));
+    
     DoublyLinkedList list;
     int size = rand() % (MAX_LS - MIN_LS + 1) + MIN_LS;
-    for (int i = 0; i < size; ++i)
-        list.push_back(rand() % (MAX_NR - MIN_NR + 1) + MIN_NR);
-
-    cout << "List forward: ";
+    
+    for (int i = 0; i < size; ++i) {
+        Goat randomGoat;
+        list.push_back(randomGoat);
+    }
+    
     list.print();
-    cout << "List backward: ";
     list.print_reverse();
-
-    cout << "Deleting list, then trying to print.\n";
-    list.~DoublyLinkedList();
-    cout << "List forward: ";
-    list.print();
 
     return 0;
 }
