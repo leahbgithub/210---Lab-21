@@ -4,6 +4,33 @@ using namespace std;
 
 const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20;
 
+class Goat {
+private:
+    int age;
+    string name;
+    string color;
+    
+    // array for randomizing names as well as colors
+    static const string names[15];
+    static const string colors[15];
+    
+public:
+    // default constructor
+    Goat() {
+        age = rand() % 20 + 1; // randomize age between 1 and 20
+        name = names[rand() % 15]; // randomize name from an array
+        color = colors[rand() % 15]; // randomize colors from an array
+    }
+    
+    // parametrized constructor
+    Goat(int a, string n, string c) : age(a), name(n), color(c) {}
+    
+    // function that will return details of goat as string value
+    string getDetails() const {
+        return name + " (" + color + ", " + to_string(age) + ")";
+    }
+};
+
 class DoublyLinkedList {
 private:
     struct Node {
