@@ -2,8 +2,10 @@
 #include <iostream>
 using namespace std;
 
+// constants which define range for list size
 const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20;
 
+// class definition for Goat
 class Goat {
 private:
     int age;
@@ -31,15 +33,19 @@ public:
     }
 };
 
+// static arrays defined with names and colors populated within them
 const string Goat::names[15] = { "Leah", "Raj", "Heena", "Shria", "Snowy", "Charlie", "Anthony", "Jason", "Macy", "Mahi", "Khaleesi", "Jon", "Jake", "Linda", "Caroline" };
 const string Goat::colors[15] = { "Red", "Blue", "Green", "Yellow", "Purple", "Orange", "Pink", "White", "Black", "Grey", "Gold", "Silver", "Aqua", "Brown", "Turquoise" };
 
+// stores Goat objects in a doubly linked list
 class DoublyLinkedList {
 private:
+    // definition for node structure
     struct Node {
-        int data;
+        Goat data;
         Node* prev;
         Node* next;
+        // constructor that will initialize node with said data
         Node(Goat val, Node* p = nullptr, Node* n = nullptr) : data(val), prev(p), next(n) {}
             };
     Node* head;
@@ -49,6 +55,7 @@ public:
     // constructor
     DoublyLinkedList() : head(nullptr), tail(nullptr) {}
 
+    // function to add node with data for Goat to back of list
     void push_back(Goat value) {
         Node* newNode = new Node(value);
         if (!tail) // if there's no tail, the list is empty
@@ -60,6 +67,7 @@ public:
         }
     }
 
+    // function to add node with data for Goat to front of list
     void push_front(Goat value) {
         Node* newNode = new Node(value);
         if (!head) // if there's no head, the list is empty
