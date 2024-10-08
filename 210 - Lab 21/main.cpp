@@ -79,24 +79,26 @@ public:
         }
     }
 
+    // function that will insert node at specific position
     void insert_after(Goat value, int position) {
         if (position < 0) {
             cout << "Position must be >= 0." << endl;
             return;
         }
-        Node* newNode = new Node(value);
-        if (!head) {
+        Node* newNode = new Node(value); // create new
+        if (!head) { // if list empty
             head = tail = newNode;
             return;
         }
         Node* temp = head;
-        for (int i = 0; i < position && temp; ++i)
+        for (int i = 0; i < position && temp; ++i) // change to desired position
             temp = temp->next;
-        if (!temp) {
+        if (!temp) { // if out of bonds
             cout << "Position exceeds list size. Node not inserted.\n";
             delete newNode;
             return;
         }
+        // insert new
         newNode->next = temp->next;
         newNode->prev = temp;
         if (temp->next)
@@ -106,6 +108,7 @@ public:
         temp->next = newNode;
     }
 
+    // function will delete node while looking at Goat name
     void delete_node(string goatName) {
         if (!head) return; // Empty list
         Node* temp = head;
@@ -125,6 +128,7 @@ public:
         delete temp;
     }
 
+    // function that will print list from head all the way to the tail
     void print() {
         if (!head) {
             cout << "List is empty" << endl;
@@ -138,6 +142,7 @@ public:
         }
     }
 
+    // same as print() but in reverse, so tail to head
     void print_reverse() {
         if (!tail) {
             cout << "List is empty" << endl;
@@ -151,27 +156,31 @@ public:
         }
     }
 
+    // destructor which will free the memory of the list
     ~DoublyLinkedList() {
         while (head) {
             Node* temp = head;
             head = head->next;
-            delete temp;
+            delete temp; // delete individual nodes
         }
     }
 };
 
 // Driver program
 int main() {
-    srand(time(0));
+    srand(time(0)); // random number generation
     
     DoublyLinkedList list;
+    // randomize goat numbers
     int size = rand() % (MAX_LS - MIN_LS + 1) + MIN_LS;
     
+    // randomized goat objects will be added to list
     for (int i = 0; i < size; ++i) {
         Goat randomGoat;
         list.push_back(randomGoat);
     }
     
+    //list will be printed in both directions
     list.print();
     list.print_reverse();
 
